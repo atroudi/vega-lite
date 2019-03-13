@@ -58,6 +58,15 @@ export interface BaseSelectionDef {
 
 export interface SingleSelectionConfig extends BaseSelectionDef {
   /**
+   * Controls clearing selections. Is a `string` that is one of the
+   * [Supported Event Types](https://vega.github.io/vega/docs/event-streams/).
+   *
+   * __Default value:__ `dblclick` (i.e. user doubleclick clears current selection).
+   *
+   * See the [TODO: clear] documentation for more information.
+   */
+  clear?: string;
+  /**
    * Establish a two-way binding between a single selection and input elements
    * (also known as dynamic query widgets). A binding takes the form of
    * Vega's [input element binding definition](https://vega.github.io/vega/docs/signals/#bind)
@@ -79,14 +88,19 @@ export interface SingleSelectionConfig extends BaseSelectionDef {
    * Initialize the selection with a mapping between [projected channels or field names](https://vega.github.io/vega-lite/docs/project.html) and initial values.
    */
   init?: SelectionInitMapping;
-
-  /**
-   * TODO add clear documentation
-   */
-  clear?: string;
 }
 
 export interface MultiSelectionConfig extends BaseSelectionDef {
+  /**
+   * Controls clearing selections. Is a `string` that is one of the
+   * [Supported Event Types](https://vega.github.io/vega/docs/event-streams/).
+   *
+   * __Default value:__ `dblclick` (i.e. user doubleclick clears current selection).
+   *
+   * See the [TODO: clear] documentation for more information.
+   */
+  clear?: string;
+
   /**
    * Controls whether data values should be toggled or only ever inserted into
    * multi selections. Can be `true`, `false` (for insertion only), or a
@@ -112,11 +126,6 @@ export interface MultiSelectionConfig extends BaseSelectionDef {
    * value (or array of values).
    */
   init?: SelectionInitMapping | SelectionInitMapping[];
-
-  /**
-   * TODO add clear documentation
-   */
-  clear?: string | boolean;
 }
 
 export interface BrushConfig {
@@ -160,6 +169,16 @@ export interface BrushConfig {
 
 export interface IntervalSelectionConfig extends BaseSelectionDef {
   /**
+   * TODO: Update this
+   * Controls clearing selections. Is a `string` that is one of the
+   * [Supported Event Types](https://vega.github.io/vega/docs/event-streams/).
+   *
+   * __Default value:__ `dblclick` (i.e. user doubleclick clears current selection).
+   *
+   * See the [TODO: clear] documentation for more information.
+   */
+  clear?: string;
+  /**
    * When truthy, allows a user to interactively move an interval selection
    * back-and-forth. Can be `true`, `false` (to disable panning), or a
    * [Vega event stream definition](https://vega.github.io/vega/docs/event-streams/)
@@ -201,11 +220,6 @@ export interface IntervalSelectionConfig extends BaseSelectionDef {
    * initial values.
    */
   init?: SelectionInitArrayMapping;
-
-  /**
-   * TODO add clear documentation
-   */
-  clear?: string | boolean;
 }
 
 export interface SingleSelection extends SingleSelectionConfig {
@@ -262,6 +276,7 @@ export const defaultConfig: SelectionConfig = {
   multi: {
     on: 'click',
     fields: [SELECTION_ID],
+    clear: 'dblclick',
     toggle: 'event.shiftKey',
     resolve: 'global',
     empty: 'all'
