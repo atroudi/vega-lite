@@ -9,7 +9,7 @@ const clear: TransformCompiler = {
   signals: (model, selCmpt, signals) => {
     const tupleIdx = signals.findIndex(i => i.name === selCmpt.name + TUPLE);
     signals[tupleIdx].on.push({
-      events: selCmpt.clear,
+      events: [{source: 'scope', type: selCmpt.clear}],
       update: 'null'
     });
     return signals;
