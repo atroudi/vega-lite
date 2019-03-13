@@ -18,9 +18,9 @@ describe('Clear Selection Transform', () => {
 
   model.parseScale();
   const selCmpts = (model.component.selection = parseUnitSelection(model, {
-    one: {type: 'multi', clear: true},
-    two: {type: 'multi', clear: 'wheel'},
-    three: {type: 'multi'},
+    one: {type: 'multi'},
+    two: {type: 'multi', clear: 'dblclick'},
+    three: {type: 'multi', clear: false},
     four: {type: 'multi', clear: null},
     five: {type: 'single'},
     six: {type: 'interval'}
@@ -61,7 +61,7 @@ describe('Clear Selection Transform', () => {
               'datum && item().mark.marktype !== \'group\' ? {unit: "", fields: one_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)["_vgsid_"]]} : null',
             force: true
           },
-          {events: selCmpts['one'].clear, update: 'null'}
+          {events: [{source: 'scope', type: selCmpts['one'].clear}], update: 'null'}
         ]
       }
     ]);
@@ -92,7 +92,7 @@ describe('Clear Selection Transform', () => {
               'datum && item().mark.marktype !== \'group\' ? {unit: "", fields: two_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)["_vgsid_"]]} : null',
             force: true
           },
-          {events: selCmpts['two'].clear, update: 'null'}
+          {events: [{source: 'scope', type: selCmpts['two'].clear}], update: 'null'}
         ]
       }
     ]);

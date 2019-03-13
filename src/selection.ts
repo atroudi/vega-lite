@@ -278,6 +278,7 @@ export const defaultConfig: SelectionConfig = {
   multi: {
     on: 'click',
     fields: [SELECTION_ID],
+    clear: 'dblclick',
     toggle: 'event.shiftKey',
     resolve: 'global',
     empty: 'all'
